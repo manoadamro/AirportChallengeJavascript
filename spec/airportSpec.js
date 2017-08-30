@@ -1,20 +1,21 @@
 describe("Airport", function() {
     beforeEach(function() {
         airport = new Airport();
+        var isClear = true;
     });
 
   it("should land a plane", function() {
-    expect(airport.land("Concorde 671")).toEqual("Concorde 671 has landed.");
+    expect(airport.land("Concorde 671", isClear)).toEqual("Concorde 671 has landed.");
   });
 
   it("should be able to takeoff", function() {
-    expect(airport.takeoff("Concorde 671")).toEqual("Concorde 671 has taken off.");
+    expect(airport.takeoff("Concorde 671", isClear)).toEqual("Concorde 671 has taken off.");
   });
 
   it("should confirm that a plane is no longer n the airport", function() {
-    airport.land("Concorde 671");
+    airport.land("Concorde 671", isClear);
     expect(airport.hangar).toContain("Concorde 671");
-    airport.takeoff("Concorde 671");
+    airport.takeoff("Concorde 671", isClear);
     expect(airport.hangar).not.toContain("Concorde 671");
   });
 
@@ -35,18 +36,20 @@ describe("Airport", function() {
   // })
 
   it("should not take off during stormy weather", function () {
-    expect(airport.takeoff("Spitfire mk2", false)).toEqual("Spitfire mk2 could not take off.")
+    var isClear = false
+    expect(airport.takeoff("Spitfire mk2", isClear)).toEqual("Spitfire mk2 could not take off.")
   });
 
   it("should take off during clear weather", function () {
-    expect(airport.takeoff("Spitfire mk2", true)).toEqual("Spitfire mk2 has taken off.")
+    expect(airport.takeoff("Spitfire mk2", isClear)).toEqual("Spitfire mk2 has taken off.")
   });
 
   it("should not land during stormy weather", function () {
-    expect(airport.land("Spitfire mk2", false)).toEqual("Spitfire mk2 could not land.")
+    var isClear = false
+    expect(airport.land("Spitfire mk2", isClear)).toEqual("Spitfire mk2 could not land.")
   });
 
   it("should land during clear weather", function () {
-    expect(airport.land("Spitfire mk2", true)).toEqual("Spitfire mk2 has landed.")
+    expect(airport.land("Spitfire mk2", isClear)).toEqual("Spitfire mk2 has landed.")
   });
 });
