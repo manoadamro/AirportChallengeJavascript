@@ -10,7 +10,7 @@ Airport.prototype.land = function(plane, clear = isClear()) {
   if (this.hangar.length >= this.capacity) {
     return "Airport full!"
   }
-  if (clear) {
+  if (clear && !this.hangar.includes(plane)) {
     this.hangar.push(plane)
     console.log(this.hangar)
     return plane + " has landed.";

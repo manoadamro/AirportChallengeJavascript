@@ -19,6 +19,12 @@ describe("Airport", function() {
       airport.takeoff("Concorde 671", isClear);
       expect(airport.hangar).not.toContain("Concorde 671");
     });
+
+    it ("Should not land a grounded plane", function () {
+      plane = "Soul Plane"
+      airport.land(plane, isClear);
+      expect(airport.land(plane, isClear)).toEqual(plane + " could not land.")
+    })
   })
 
   describe ("Weather", function () {
